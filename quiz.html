@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mental Health Quiz</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaf2f8; /* Light blue background */
+            color: #333; /* Dark gray text */
+            line-height: 1.6;
+        }
+
+        /* Centered Quiz Container */
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background-color: #ffffff; /* White background */
+            padding: 20px 30px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50; /* Dark blue header */
+            margin-bottom: 20px;
+        }
+
+        /* Question Styling */
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-size: 16px; /* Question font size */
+            font-weight: bold;
+            margin: 0 0 10px;
+            color: #1f4e79; /* Medium blue for questions */
+        }
+
+        /* Answer Options Styling */
+        label {
+            display: block;
+            font-size: 12px; /* Answer options font size */
+            padding: 8px 10px;
+            margin: 5px 0;
+            background-color: #f4f6f7; /* Light gray for options */
+            border: 1px solid #d4e6f1; /* Light blue border */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        /* Hover Effect */
+        label:hover {
+            background-color: #d4e6f1; /* Slightly darker blue on hover */
+        }
+
+        /* Submit Button */
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff; /* White text */
+            background-color: #2e86c1; /* Blue button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1f618d; /* Darker blue on hover */
+        }
+
+        /* Results Section */
+        #results {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 14px;
+            background-color: #e8f8f5; /* Light green background */
+            border: 1px solid #a3e4d7;
+            color: #117864; /* Green text */
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Quiz Container -->
+    <div class="container">
+        <h1>Mental Health Awareness Quiz</h1>
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. What is a common sign of stress?</p>
+                <label><input type="radio" name="q1" value="1"> Difficulty sleeping</label>
+                <label><input type="radio" name="q1" value="0"> Feeling extremely joyful all the time</label>
+                <label><input type="radio" name="q1" value="0"> Watching relaxing TV shows</label>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. Which activity helps manage anxiety?</p>
+                <label><input type="radio" name="q2" value="1"> Deep breathing exercises</label>
+                <label><input type="radio" name="q2" value="0"> Overworking yourself</label>
+                <label><input type="radio" name="q2" value="0"> Eating junk food</label>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. What is self-care?</p>
+                <label><input type="radio" name="q3" value="1"> Taking care of physical and mental well-being</label>
+                <label><input type="radio" name="q3" value="0"> Ignoring your feelings</label>
+                <label><input type="radio" name="q3" value="0"> Staying up late every night</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button" onclick="calculateScore()">Submit Quiz</button>
+        </form>
+
+        <!-- Results Display -->
+        <div id="results"></div>
+    </div>
+
+    <!-- JavaScript for Quiz Logic -->
+    <script>
+        function calculateScore() {
+            let score = 0;
+
+            // Access the form
+            const form = document.forms['quizForm'];
+            const answers = ['q1', 'q2', 'q3'];
+
+            // Calculate score
+            answers.forEach(question => {
+                const selected = form[question].value;
+                score += parseInt(selected) || 0;
+            });
+
+            // Display results
+            let resultMessage = '';
+            if (score === 3) {
+                resultMessage = "Excellent! You have a great understanding of mental health!";
+            } else if (score === 2) {
+                resultMessage = "Good job! You have a solid grasp of mental health basics.";
+            } else {
+                resultMessage = "Keep learning! Mental health awareness is important.";
+            }
+
+            document.getElementById('results').innerHTML = `Your Score: ${score}/3<br>${resultMessage}`;
+        }
+    </script>
+</body>
+</html>
